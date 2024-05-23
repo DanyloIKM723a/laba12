@@ -1,5 +1,4 @@
-﻿#include <iostream>
-#include <algorithm>
+#include <iostream>
 
 const int ROWS = 3;
 const int COLS = 3;
@@ -9,7 +8,10 @@ void sortFirstColumnDescending(int matrix[ROWS][COLS]) {
         for (int j = i + 1; j < ROWS; ++j) {
             if (matrix[i][0] < matrix[j][0]) {
                 for (int k = 0; k < COLS; ++k) {
-                    std::swap(matrix[i][k], matrix[j][k]);
+                    // Замість std::swap використовуємо ручну заміну
+                    int temp = matrix[i][k];
+                    matrix[i][k] = matrix[j][k];
+                    matrix[j][k] = temp;
                 }
             }
         }
@@ -29,8 +31,11 @@ int main() {
         }
     }
 
+    // Ручна заміна рядків
     for (int i = 0; i < COLS; ++i) {
-        std::swap(matrix[maxRowIndex][i], matrix[minRowIndex][i]);
+        int temp = matrix[maxRowIndex][i];
+        matrix[maxRowIndex][i] = matrix[minRowIndex][i];
+        matrix[minRowIndex][i] = temp;
     }
 
     sortFirstColumnDescending(matrix);
